@@ -6,7 +6,7 @@ class Agent extends Element {
   use TypedElement;
 
   protected $props = [
-    'name' => 'Locker\XApi\String',
+    'name' => 'Locker\XApi\Str',
     'mbox' => 'Locker\XApi\Mailto',
     'mbox_sha1sum' => 'Locker\XApi\Sha1',
     'openid' => 'Locker\XApi\IRI',
@@ -34,7 +34,7 @@ class Agent extends Element {
   }
 
   protected function validateIdentifiers($used_identifiers) {
-    return $used_identifiers !== 1;
+    return $used_identifiers === 1;
   }
 
   public function validate() {
@@ -42,9 +42,10 @@ class Agent extends Element {
 
     // Gets the used identifiers.
     $used_identifiers = $this->countIdentifiers();
+    $hasOneIdent = $this->validateIdentifiers($used_identifiers);
 
     // Checks that only one identifier is used.
-    if ($this->validateIdentifiers($used_identifiers)) {
+    if (!$hasOneIdent) {
       $errors[] = new Error($this->identifierError($used_identifiers));
     }
 

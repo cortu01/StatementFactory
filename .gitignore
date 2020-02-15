@@ -4,5 +4,8 @@
 # Composer.
 vendor
 composer.lock
+composer.phar
+
+.idea/
 
 tests/assets/test.json
